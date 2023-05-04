@@ -83,64 +83,64 @@ window.onload = function(){
 		}); 
 
 		//getting currency details basedon defauly cire
-		$.ajax({
-			url: "php/countriesRec.php",
-			type: 'GET',
-			dataType: 'json',
-			success: function(result) {		
-				const curLocation = getCountry()
-				const objectData = result['data']
-				const countryData = Object.entries(objectData.features)
-				const filteredData = countryData.filter(([key,value]) => value.properties.name.trim() === curLocation.trim() )
-				const cCode = filteredData[0][1].properties.iso_a2
-				//console.log("My filteredData Code = ", cCode)
-				const currencyCodeObj = getCurrencyCode(cCode)
-				const curCode = Object.entries(currencyCodeObj)[0][1]
-				console.log("My currencyCode ",curCode )
-				$.ajax({
-					url: "php/currencyDetails.php",
-					type: 'GET',
-					dataType: 'json',
-					data: {
-						currencies:curCode,
-					},
-					success: function(result) {
-						//JSON.stringify(result)
-						console.log("currency api",result.data);
+		// $.ajax({
+		// 	url: "php/countriesRec.php",
+		// 	type: 'GET',
+		// 	dataType: 'json',
+		// 	success: function(result) {		
+		// 		const curLocation = getCountry()
+		// 		const objectData = result['data']
+		// 		const countryData = Object.entries(objectData.features)
+		// 		const filteredData = countryData.filter(([key,value]) => value.properties.name.trim() === curLocation.trim() )
+		// 		const cCode = filteredData[0][1].properties.iso_a2
+		// 		//console.log("My filteredData Code = ", cCode)
+		// 		const currencyCodeObj = getCurrencyCode(cCode)
+		// 		const curCode = Object.entries(currencyCodeObj)[0][1]
+		// 		console.log("My currencyCode ",curCode )
+		// 		$.ajax({
+		// 			url: "php/currencyDetails.php",
+		// 			type: 'GET',
+		// 			dataType: 'json',
+		// 			data: {
+		// 				currencies:curCode,
+		// 			},
+		// 			success: function(result) {
+		// 				//JSON.stringify(result)
+		// 				console.log("currency api",result.data);
 		
 		
 					
-						const exTableHeader =`<tr>
-							<th scope="col">Currency</th>
-							<th scope="col">Exchange Rate</th>							
-							</tr>`;		
+		// 				const exTableHeader =`<tr>
+		// 					<th scope="col">Currency</th>
+		// 					<th scope="col">Exchange Rate</th>							
+		// 					</tr>`;		
 	
-						let exTableData = '';
-						for(let i in result.data){
-							exTableData += `<tr>
-							<td>${result.data[i].code}</td>
-							<td>${result.data[i].value.toFixed(2)}</td>
+		// 				let exTableData = '';
+		// 				for(let i in result.data){
+		// 					exTableData += `<tr>
+		// 					<td>${result.data[i].code}</td>
+		// 					<td>${result.data[i].value.toFixed(2)}</td>
 							
 							
-							</tr>`;			
+		// 					</tr>`;			
 						
-							//console.log(tableData);
-						//document.querySelector('.tableData').innerHTML = tableData;
+		// 					//console.log(tableData);
+		// 				//document.querySelector('.tableData').innerHTML = tableData;
 						
-						$('.exTableHeader').html(exTableHeader);
-						$('.exTableData').html(exTableData);
-						}
+		// 				$('.exTableHeader').html(exTableHeader);
+		// 				$('.exTableData').html(exTableData);
+		// 				}
 					
-					},
-					error: function(jqXHR, textStatus, errorThrown) {
-						// your error code
-						console.log(errorThrown);
-					}
-				}); 
+		// 			},
+		// 			error: function(jqXHR, textStatus, errorThrown) {
+		// 				// your error code
+		// 				console.log(errorThrown);
+		// 			}
+		// 		}); 
 			
-			}
+		// 	}
 			
-		});
+		// });
 
 		
 	
@@ -500,6 +500,158 @@ $('#country').on('change',function() {
 		async: false
 	});
 	
+	// $.ajax({
+	// 	url: "php/countriesRec.php",
+	// 	type: 'GET',
+	// 	dataType: 'json',
+	// 	data: {
+	// 		country: $('#country').val(),
+	// 	},
+	// 	success: function(result) {		
+	// 		//const selectedLocation = getCountry()
+	// 		const selectedLocation = $('#country').val()
+	// 		// console.log("My currencyCode onChange ",selectedLocation )
+	// 		// const objectData = result['data']
+	// 		// const countryData = Object.entries(objectData.features)
+	// 		// const filteredData = countryData.filter(([key,value]) => value.properties.name.trim() === selectedLocation.trim() )
+	// 		// const cCode = filteredData[0][1].properties.iso_a2
+	// 		//console.log("My filteredData Code = ", cCode)
+	// 		const currencyCodeObj = getCurrencyCode(selectedLocation)
+	// 		const curCode = Object.entries(currencyCodeObj)[0][1]
+			
+	// 		$.ajax({
+	// 			url: "php/currencyDetails.php",
+	// 			type: 'GET',
+	// 			dataType: 'json',
+	// 			data: {
+	// 				currencies:curCode,
+	// 			},
+	// 			success: function(result) {
+	// 				//JSON.stringify(result)
+	// 				console.log("currency api",result.data);
+	
+	
+				
+	// 				const exTableHeader =`<tr>
+	// 					<th scope="col">Currency</th>
+	// 					<th scope="col">Exchange Rate</th>							
+	// 					</tr>`;		
+
+	// 				let exTableData = '';
+	// 				for(let i in result.data){
+	// 					exTableData += `<tr>
+	// 					<td>${result.data[i].code}</td>
+	// 					<td>${result.data[i].value.toFixed(2)}</td>
+						
+						
+	// 					</tr>`;			
+					
+	// 					//console.log(tableData);
+	// 				//document.querySelector('.tableData').innerHTML = tableData;
+					
+	// 				$('.exTableHeader').html(exTableHeader);
+	// 				$('.exTableData').html(exTableData);
+	// 				}
+				
+	// 			},
+	// 			error: function(jqXHR, textStatus, errorThrown) {
+	// 				// your error code
+	// 				console.log(errorThrown);
+	// 			}
+	// 		}); 
+		
+	// 	}
+		
+	// });
+
+});
+
+
+$('.weatherDetail').on('click',function () {
+	 console.log("Got clicked here")
+	 $.ajax({
+		url: "php/updatedWeather.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			country: $('#country').val(),
+		},
+		success: function(result) {
+			//$(".result").empty()
+			console.log(JSON.stringify(result));
+			const new_lat = result['data'][0].geometry.lat;
+			const new_lng = result['data'][0].geometry.lng;
+			
+			console.log("New lat var",new_lat);
+			console.log("New long var",new_lng); 
+			
+			$.ajax({
+				url: "php/openweathermap2.php",
+				type: 'GET',
+				dataType: 'json',
+				data: {
+					lat: new_lat,
+					lng: new_lng
+				},
+				success: function(result) {
+				//
+					//$(".result tableHeader").empty();
+					//console.log("All result ", result)
+					// console.log(result.data);
+					//console.log($('#lat').val());
+					//var temp = "Tempearture" + result['data'][0].main.temp;
+					//console.log(temp);
+					
+		
+					const tableHeader =`<tr>
+					<th scope="col">Date/Time</th>
+						<th scope="col">Temperature</th>
+						<th scope="col">Feels Like</th>
+						<th scope="col">Min Temperature</th>
+						<th scope="col">Max Temperature</th>
+						<th scope="col">Description</th>
+						</tr>`;		
+		
+					let tableData = '';
+					for(let key in result.data){
+						console.log("each object "+key)
+						const date = new Date(key);
+						const new_date = new Intl.DateTimeFormat('en-GB', { dateStyle: 'full'}).format(date);
+		
+						tableData += `<tr>
+						<th colspan='6' style='background:#337ab7;color:yellow;font-size:16px;text-align:center;padding:5px'>${new_date}</th>							
+						</tr>`;	
+						for(let j in result.data[key]){
+							tableData += `<tr>							
+							<td>${result.data[key][j].dt_txt.slice(11)}</td>
+							<td>${result.data[key][j].main.temp}</td>
+							<td>${result.data[key][j].main.feels_like}</td>
+							<td>${result.data[key][j].main.temp_min}</td>
+							<td>${result.data[key][j].main.temp_max}</td>
+							<td>${result.data[key][j].weather[0].description}</td>
+							
+							</tr>`;			
+						}
+						//console.log(tableData);
+					//document.querySelector('.tableData').innerHTML = tableData;
+					
+						$('.modal-tableHeader').html(tableHeader);
+					    $('.modal-tableData').html(tableData);
+					$('#weather_forecast').modal('show');//now its working
+					}
+				
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					// your error code
+					console.log("erreor",errorThrown)
+				}
+			});
+		},
+		async: false
+	});
+});
+
+$(".exRate").on('click',function(){
 	$.ajax({
 		url: "php/countriesRec.php",
 		type: 'GET',
@@ -532,25 +684,28 @@ $('#country').on('change',function() {
 	
 	
 				
-					const exTableHeader =`<tr>
+					const rateTableHeader =`<tr>
 						<th scope="col">Currency</th>
-						<th scope="col">Exchange Rate</th>							
+						<th scope="col">Exchange Rate</th>
+						<th scope="col">&lt;&gt</th>	
+						<th scope="col">Dollar</th>							
 						</tr>`;		
 
-					let exTableData = '';
+					let rateTableData = '';
 					for(let i in result.data){
-						exTableData += `<tr>
+						rateTableData += `<tr>
 						<td>${result.data[i].code}</td>
 						<td>${result.data[i].value.toFixed(2)}</td>
-						
-						
+						<td>-</td>
+						<td>$1</td>			
 						</tr>`;			
 					
 						//console.log(tableData);
 					//document.querySelector('.tableData').innerHTML = tableData;
 					
-					$('.exTableHeader').html(exTableHeader);
-					$('.exTableData').html(exTableData);
+					$('.rateTableHeader').html(rateTableHeader);
+					$('.rateTableData').html(rateTableData);
+					$('#exchange_rate').modal('show');//now its working
 					}
 				
 				},
@@ -563,7 +718,4 @@ $('#country').on('change',function() {
 		}
 		
 	});
-
-});
-
-
+})

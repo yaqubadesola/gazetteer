@@ -36,16 +36,16 @@ if (is_array($decode['list']) && count($decode['list']) > 0) {
 
 	}
 }
-
+$dailyWeatherForecast = [array_key_first($new_weather_list) => $new_weather_list[array_key_first($new_weather_list)]];
 // echo "<pre>";
-// print_r($new_weather_list);
+// print_r($dailyWeatherForecast);
 // echo "</pre>";
 // die("stop");
 $output['status']['code'] = "200";
 $output['status']['name'] = "ok";
 $output['status']['description'] = "success";
 $output['status']['returnedIn'] = intval((microtime(true) - $executionStartTime) * 1000) . " ms";
-$output['data'] = $new_weather_list;
+$output['data'] = $dailyWeatherForecast;
 
 header('Content-Type: application/json; charset=UTF-8');
 

@@ -621,7 +621,13 @@ select {
 .explore-open-close-part {
     margin-top: 20px;
 }
-
+#weather_forecast{
+    width: 100%;
+    cursor: pointer;
+}
+.modal-dialog{
+    width: 80%;
+}
 #map {
     height: 100% !important;
     width: 100vw;

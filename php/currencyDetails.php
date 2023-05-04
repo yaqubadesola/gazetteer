@@ -8,7 +8,7 @@ $executionStartTime = microtime(true);
 
 $app_id = '4u8bV9x0wnGrHE3WeWJcm7m60bQT5ggSTikkvuig';
 $currencies = $_REQUEST['currencies'];
-$url = 'https://api.currencyapi.com/v3/latests?apikey=' . $app_id . '&currencies=' . $currencies;
+$url = 'https://api.currencyapi.com/v3/latest?apikey=' . $app_id . '&currencies=' . $currencies;
 
 
 
