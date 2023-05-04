@@ -1,21 +1,4 @@
 import {getCountry, getCurrencyCode} from './countriesInfo.js'
-/*
-//Using Parse Method to load data into Country Select Tag
-const xmlhttp = new XMLHttpRequest();
-
-xmlhttp.onload = function() {
-const myObj = JSON.parse(this.responseText);
-console.log(myObj);
-console.log(myObj[0]["properties"]);
-//console.log(myObj[0]['properties']['iso_a2']);
-//console.log(myObj[0]['properties']['name']);
-//console.log(myObj.features[0].properties.iso_a2);
-//$('#txtContinent').html(result['data'][0]['continent']);
-//console.log(myObj.features[1].properties.iso_a2);
-}
-xmlhttp.open("GET", "./php/countries.php");
-xmlhttp.send();
-*/
 
 window.onload = function(){
 	
@@ -187,8 +170,7 @@ window.onload = function(){
 //Calling current location of device
 currentLocation();
 
-//***************************************************/
-//Weather API
+
 
 }
 // call this method before you initialize your map.
@@ -306,7 +288,8 @@ function currentLocation(){
 								<br>Flag: ${flag}
 								<br>Drive On: ${drive_on}
 								<br>Speed In: ${speed_in}
-								<br>${countryURL}`).openPopup();
+								`).openPopup();
+								//<br>${countryURL}`).openPopup();
 	
 					$('.map').html(marker);
 				
@@ -399,7 +382,8 @@ $('#country').on('change',function() {
 						<br>Latitude ${lat}   
 						<br>Longtitude: ${lng}
 						<br>Flag: ${flag}
-						<br>${countryURL}`).openPopup();
+						`).openPopup();
+						//<br>${countryURL}`).openPopup();
 
 			$('.map').html(marker);
 
@@ -718,4 +702,159 @@ $(".exRate").on('click',function(){
 		}
 		
 	});
-})
+
+});
+
+
+/***************Wikipedia***************************************/
+$('#wikipedia').click(function() {
+	$.ajax({
+		url: "php/selectedCountry.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			country: $('#country').val()
+			
+		},
+		success: function(result) {
+
+			//console.log(JSON.stringify(result));
+			console.log($('#country').val());
+			//console.log(result['data'][0].geometry.lat);
+			//console.log(result['data'][0].geometry.lng);
+			var lat = result['data'][0].geometry.lat;
+			var lng = result['data'][0].geometry.lng;
+			var callingcode = result['data'][0].annotations.callingcode;
+			var isoCode = result['data'][0].annotations.currency.iso_code;
+			var isoNumeric = result['data'][0].annotations.currency.iso_numeric;
+			var subunit = result['data'][0].annotations.currency.subunit;
+			var continent = result['data'][0].components.continent;
+			var country = result['data'][0].components.country;
+			var countryCode = result['data'][0].components.country_code;
+			var flag = result['data'][0].annotations.flag;
+			var url = result['data'][0].annotations.OSM.url;
+			var countryReplace = country.replace(" " , "_");
+			var wikipedia = `https://en.m.wikipedia.org/wiki/${countryReplace}`;
+			//var countryURL = `<a href=${url} target="_blank"><button type="button" class="btn btn-primary">	Country URL </button></a>`;
+			console.log(url);
+			console.log(countryReplace);
+			console.log(wikipedia);
+			
+			const wikipediaData = `<div>
+			<object type="text/html" data="${wikipedia}" width="100%" height="600px"  style="overflow:auto;border:5px ridge blue">
+			</object></div>`
+
+
+			$('#wikipediaModal').html(`${wikipediaData}`);
+			//$('#countryInfo').html(`${country}`);
+			
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			// your error code
+		}
+	}); 
+
+});
+
+
+/**************Country Information Modal***********************/
+
+$('#countryInfo').click(function() {
+	$.ajax({
+		url: "php/selectedCountry.php",
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			country: $('#country').val()
+			
+		},
+		success: function(result) {
+
+			//console.log(JSON.stringify(result));
+			console.log($('#country').val());
+			//console.log(result['data'][0].geometry.lat);
+			//console.log(result['data'][0].geometry.lng);
+			var lat = result['data'][0].geometry.lat;
+			var lng = result['data'][0].geometry.lng;
+			var callingcode = result['data'][0].annotations.callingcode;
+			var isoCode = result['data'][0].annotations.currency.iso_code;
+			var isoNumeric = result['data'][0].annotations.currency.iso_numeric;
+			var subunit = result['data'][0].annotations.currency.subunit;
+			var continent = result['data'][0].components.continent;
+			var country = result['data'][0].components.country;
+			var countryCode = result['data'][0].components.country_code;
+			var flag = result['data'][0].annotations.flag;
+			var url = result['data'][0].annotations.OSM.url;
+			//var countryReplace = country.replace(" " , "_");
+			//var wikipedia = `https://en.m.wikipedia.org/wiki/${countryReplace}`;
+			var countryURL = `<a href=${url} target="_blank"><button type="button" class="btn btn-primary">	Country URL </button></a>`;
+			console.log(url);
+			//console.log(countryReplace);
+			//console.log(wikipedia);
+			
+			const countryInfo = `
+			<table class="table table-striped">
+				<thead>					
+					<tr> 
+						<th scope="col"></th>
+						<th scope="col"></th>							
+					</tr>	
+				</thead>
+							
+				<tbody>
+					<tr>
+						<td><b>Country:</b></td>
+						<td>${country}</td>
+					</tr>	
+					<tr>
+						<td><b>Continent:</b></td>
+						<td>${continent}</td>
+					</tr>
+					<tr>
+						<td><b>Country Code:</b></td>
+						<td>${countryCode}</td>
+					</tr>	
+					<tr>
+						<td><b>Calling Code:</b></td>
+						<td>${callingcode}</td>
+					</tr>	
+					<tr>
+						<td><b>Iso Code:</b></td>
+						<td>${isoCode}</td>
+					</tr>
+					<tr>
+						<td><b>Iso Numeric:</b></td>
+						<td>${isoNumeric}</td>
+					</tr>	
+					<tr>
+						<td><b>Sub unit:</b></td>
+						<td>${subunit}</td>
+					</tr>		
+					<tr>
+						<td><b>Latitude:</b></td>
+						<td>${lat}</td>
+					</tr>
+					<tr>
+						<td><b>Longtitude:</b></td>
+						<td>${lng}</td>
+					</tr>
+					<tr>
+						<td><b>Flag:</b></td>
+						<td>${flag}</td>
+					</tr>
+					
+				</tbody>
+			</table>`;
+			
+			$('#countryInfoModal').html(`${countryInfo}`);
+			
+		},
+		error: function(jqXHR, textStatus, errorThrown) {
+			// your error code
+		}
+	}); 
+
+});
+
+
+
