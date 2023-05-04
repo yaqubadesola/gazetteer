@@ -190,45 +190,47 @@
 		<div class="list-topics-content">
 			<ul>
 				<li>
-					<div class="single-list-topics-content">
+					<div class="single-list-topics-content" data-toggle="modal" data-target="#myModal2"  id="countryInfo" name="countryInfo">
 						<div class="single-list-topics-icon">
 							<i class="flaticon-location-on-road"></i>
 						</div>
-						<h2><a href="#" data-toggle="modal" data-target="#myModal2"  id="countryInfo" name="countryInfo">Get Country Info</a></h2>
+						<h2><p>Get Country Info</p></h2>
 						<!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal2"  id="countryInfo" name="countryInfo">Country Info</button-->
 					
 					</div>
 				</li>
 				<li>
-					<div class="single-list-topics-content">
-						<div class="single-list-topics-icon">
-							<i class="flaticon-placeholder"></i>
-						</div>
-						<h2><a href="#">Get Exchange Rate</a></h2>
-						<!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal3"  id="exchangeRate" name="exchangeRate">Exchange Rate</button-->
 					
-					</div>
-				</li>
-				<li>
-					<div class="single-list-topics-content">
-						<div class="single-list-topics-icon">
-							<i class="flaticon-gps-fixed-indicator"></i>
+						<div class="single-list-topics-content exRate" data-toggle="modal" data-target="#exchange_rate">
+							<div class="single-list-topics-icon">
+								<i class="flaticon-search"></i>
+							</div>
+							<h2><p href="#">Get Exchange Rate</p></h2>
+						
 						</div>
-						<!--h2><a href="#">Check Weather Forecast</a></h2-->
-						<h2><a href="#" data-toggle="modal" data-target="#myModal4"  id="weatherInfo" name="weatherInfo">Check Weather Forecast</a></h2>
-						<!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal4"  id="weatherForecast" name="weatherForecast">Weather Forecast</button-->
-					</div>
-				</li>
+				</li>	
 				<li>
-					<div class="single-list-topics-content">
-						<div class="single-list-topics-icon">
-							<i class="flaticon-pills"></i>
-						</div>
-						<h2><a href="#" data-toggle="modal" data-target="#myModal"  id="wikipedia" name="wikipedia">Wikipedia</a></h2>
-						<!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal"  id="wikipedia" name="wikipedia">Wikipedia</button-->
 					
-					</div>
-				</li>
+						<div class="single-list-topics-content weatherDetail" data-toggle="modal" data-target="#weather_forecast">
+							<div class="single-list-topics-icon">
+								<i class="flaticon-gps-fixed-indicator"></i>
+							</div>
+							<h2><p href="#">Check Weather Forecast</p></h2>
+						
+						</div>
+					
+				</li>	
+				<li>
+					
+						<div class="single-list-topics-content" data-toggle="modal" data-target="#myModal"  id="wikipedia" name="wikipedia">
+							<div class="single-list-topics-icon">
+								<i class="flaticon-search"></i>
+							</div>
+							<h2><p>Wikipedia</p></h2>
+						
+						</div>
+					
+				</li>				
 			</ul>
 		</div>
 	 <!-- Modal Wikipedi-->
@@ -269,52 +271,55 @@
 			</div>
 		  </div>
 		   <!-- Modal Exchange Rate-->
-		 <div class="modal fade" id="myModal3" role="dialog">
-			<div class="modal-dialog modal-lg">
+		<div class="modal fade" id="exchange_rate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+			<div class="modal-dialog" role="document">
 			  <div class="modal-content">
 				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Exchange Rate</h4>
+				  <h5 class="modal-title" id="exampleModalLongTitle">Currency Exchange Rate</h5>
+				  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				  </button>
 				</div>
 				<div class="modal-body">
-					
-					<div id="exchangeRateModal"></div>
+					<table class="table" >
+						<thead class="rateTableHeader">					
+						</thead>
+						
+						<tbody class="rateTableData">
+						</tbody>
+					</table>
 				</div>
 				<div class="modal-footer">
-				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>					  
 				</div>
 			  </div>
 			</div>
-		  </div>
+		</div>
 		    <!-- Modal Weather Forecast-->
-		 <div class="modal fade" id="myModal4" role="dialog">
-			<div class="modal-dialog modal-lg">
-			  <div class="modal-content">
-				<div class="modal-header">
-				  <button type="button" class="close" data-dismiss="modal">&times;</button>
-				  <h4 class="modal-title">Weather Forecast</h4>
-				</div>
-				<div class="modal-body">
-					
-					<div id="weatherForecastModal">
-
-							<h2 id="weatherCountry"></h2>
-							<table class="table table-striped">
-								<thead class="weatherHeader">					
-								</thead>
-								
-								<tbody class="weatherData">
-								</tbody>
-							</table>
-
+			<div class="modal fade" id="weather_forecast" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+				<div class="modal-dialog" role="document">
+				  <div class="modal-content">
+					<div class="modal-header">
+					  <h5 class="modal-title" id="exampleModalLongTitle">Daily Weather Forecast</h5>
+					  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					  </button>
 					</div>
+					<div class="modal-body">
+						<table class="table" >
+							<thead class="modal-tableHeader">					
+							</thead>
+							
+							<tbody class="modal-tableData">
+							</tbody>
+						</table>
+					</div>
+					<div class="modal-footer">
+					  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>					  
+					</div>
+				  </div>
 				</div>
-				<div class="modal-footer">
-				  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			  </div>
 			</div>
-		  </div>
 	</div><!--/.container-->
 
 </section><!--/.list-topics-->
